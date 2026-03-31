@@ -1,6 +1,13 @@
-@extends("layouts.app")
+ @extends("layouts.app")
 @section("content")
-<h1 class="h1 text-success text-center">liste des produits</h1>
+<a href="{{ route('produit.create') }}" class="btn btn-success"style="margin-left:75%; margin-top: 50px;">Ajouter un produit</a>
+<div class="card" style="width: 58rem; margin:  auto; ">
+    <div class="card-header bg-success text-white">
+        <h1 class="text-center">Liste des produits</h1>
+    </div>
+    <div class="card-body">
+      
+
 <table class="table table-hover">
   <thead class="table-success">
     <tr>
@@ -26,5 +33,7 @@
   @endforeach
   </tbody>
 </table>
-@endsection
     
+    </div>
+</div>
+@endsection

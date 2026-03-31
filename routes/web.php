@@ -11,6 +11,7 @@ Route::get('/', function () {
 // Route::get('/teste', function () {
 //     return "bonjours";
 // });
-Route::get('/produit',[ProduitController::class ,"index"]);
-Route::get('/formulaire',[ProduitController::class ,"create"]);
-Route::get('/detail/{id}',[ProduitController::class ,"show"])->name("produit.detail");
+Route::get('/produit',[ProduitController::class ,"index"])->name("produit.index");
+Route::get('/formulaire',[ProduitController::class ,"create"])->name("produit.create");
+Route::get('/detail/{produit}',[ProduitController::class ,"show"])->name("produit.detail");
+Route::post('/produit',[ProduitController::class ,"store"])->name("produit.store");

@@ -23,7 +23,7 @@ class ProduitController extends Controller
      */
     public function create()
     {
-        //
+        return view("produits.formulaire");
     }
 
     /**
@@ -39,7 +39,9 @@ class ProduitController extends Controller
      */
     public function show(Produit $produit)
     {
-        return view("produits.detail");
+       
+
+        return view("produits.detail",compact("produit"));
     }
 
     /**
