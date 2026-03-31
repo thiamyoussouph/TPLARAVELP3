@@ -1,0 +1,1 @@
+fichier detail d'un produit
