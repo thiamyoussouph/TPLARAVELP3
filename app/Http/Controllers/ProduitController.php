@@ -31,7 +31,35 @@ class ProduitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate=$request->validate([
+            "nom"=>"required|string|max:35|min:3|unique:produits",
+            "prix"=>"required",
+            "description"=>"required"
+        ],[
+            "nom.required"=>"le nom est obligatoire",
+            "nom.string"=>"le nom doit etre une chaine de caractere",
+            "nom.max"=>"le nom doit pas depasser 35 caracteres",
+            "nom.min"=>"le nom doit pas etre inferieur a 3 caracteres",
+            "nom.unique"=>"le nom doit etre unique",
+            "prix.required"=>"le prix est obligatoire",
+            "description.required"=>"la description est obligatoire"
+        ]);
+
+
+        //premiere methode
+    // Produit::create([
+    //     "nom"=>$request->nom,
+    //     "prix"=>$request->prix,
+    //     "description"=>$request->description
+    // ]);
+//deuxieme methode
+    $produit= new Produit();
+    $produit->nom=$request->nom;
+    $produit->prix=$request->prix;
+    $produit->description=$request->description;
+    $produit->save();
+    return redirect()->route("produit.index");
+
     }
 
     /**
@@ -49,7 +77,7 @@ class ProduitController extends Controller
      */
     public function edit(Produit $produit)
     {
-        
+        return view("produits.edit",compact("produit"));
     }
 
     /**
@@ -57,7 +85,11 @@ class ProduitController extends Controller
      */
     public function update(Request $request, Produit $produit)
     {
-        //
+         $produit->nom=$request->nom;
+    $produit->prix=$request->prix;
+    $produit->description=$request->description;
+    $produit->save();
+    return redirect()->route("produit.index");
     }
 
     /**
@@ -65,6 +97,7 @@ class ProduitController extends Controller
      */
     public function destroy(Produit $produit)
     {
-        //
+        $produit->delete();
+        return redirect()->route("produit.index");
     }
 }

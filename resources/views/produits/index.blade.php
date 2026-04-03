@@ -1,7 +1,7 @@
  @extends("layouts.app")
 @section("content")
 <a href="{{ route('produit.create') }}" class="btn btn-success"style="margin-left:75%; margin-top: 50px;">Ajouter un produit</a>
-<div class="card" style="width: 58rem; margin:  auto; ">
+<div class="card" style="width: 68rem; margin:  auto; ">
     <div class="card-header bg-success text-white">
         <h1 class="text-center">Liste des produits</h1>
     </div>
@@ -26,8 +26,12 @@
       <td>{{ $produit->description }}</td>
       <td>{{ $produit->prix }}</td>
       <td><a href="{{route('produit.detail',$produit->id )}}" class="btn btn-outline-success">detail</a>
-      <a href=""class="btn btn-outline-warning">editer</a>
-      <a href=""class="btn btn-outline-danger">supprimer</a>
+      <a href="{{route('produit.edit',$produit->id )}}"class="btn btn-outline-warning">editer</a>
+     <form action="{{ route('produit.delete', $produit->id) }}" method="post">
+        @csrf
+        @method("DELETE")
+        <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')">sup</button>
+      </form>
     </td>
     </tr>
   @endforeach
