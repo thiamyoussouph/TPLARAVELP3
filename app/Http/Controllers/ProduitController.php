@@ -36,7 +36,7 @@ class ProduitController extends Controller
             "prix"=>"required",
             "description"=>"required"
         ],[
-            "nom.required"=>"le nom est obligatoire",
+            "nom.required"=>"le nom est obligatoire ",
             "nom.string"=>"le nom doit etre une chaine de caractere",
             "nom.max"=>"le nom doit pas depasser 35 caracteres",
             "nom.min"=>"le nom doit pas etre inferieur a 3 caracteres",
@@ -58,7 +58,7 @@ class ProduitController extends Controller
     $produit->prix=$request->prix;
     $produit->description=$request->description;
     $produit->save();
-    return redirect()->route("produit.index");
+    return redirect()->route("produit.index")->with("success","le produit a ete ajouter avec succes");
 
     }
 

@@ -5,7 +5,20 @@
         <h1 class="text-center">Ajouter un produit</h1>
     </div>
     <div class="card-body">
+   
       
+        @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            
+              </div>
+        @endif
+  
+
       <form method="post" action="{{ route('produit.store') }}">
         @csrf
   <div class="mb-3">

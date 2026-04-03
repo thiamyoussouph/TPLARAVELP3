@@ -1,10 +1,17 @@
  @extends("layouts.app")
 @section("content")
+@if (session("success"))
+    <div class="alert alert-success" role="alert">
+        {{ session("success") }}
+        
+</div>
+    @endif
 <a href="{{ route('produit.create') }}" class="btn btn-success"style="margin-left:75%; margin-top: 50px;">Ajouter un produit</a>
-<div class="card" style="width: 68rem; margin:  auto; ">
+<div class="card" style="width: 58rem; margin:  auto; ">
     <div class="card-header bg-success text-white">
         <h1 class="text-center">Liste des produits</h1>
     </div>
+    
     <div class="card-body">
       
 
@@ -25,7 +32,8 @@
       <td>{{ $produit->nom }}</td>
       <td>{{ $produit->description }}</td>
       <td>{{ $produit->prix }}</td>
-      <td><a href="{{route('produit.detail',$produit->id )}}" class="btn btn-outline-success">detail</a>
+      <td class="d-flex">
+        <a href="{{route('produit.detail',$produit->id )}}" class="btn btn-outline-success">detail</a>
       <a href="{{route('produit.edit',$produit->id )}}"class="btn btn-outline-warning">editer</a>
      <form action="{{ route('produit.delete', $produit->id) }}" method="post">
         @csrf
