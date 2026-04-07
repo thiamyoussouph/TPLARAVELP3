@@ -20,7 +20,7 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        //
+        return view("categories.form");
     }
 
     /**
@@ -28,7 +28,19 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate=$request->validate([
+            "nom"=>"required|string|max:25|min:3|unique:categories",
+        ],[
+            "nom.required"=>"le nom est obligatoire ",
+            "nom.string"=>"le nom doit etre une chaine de caractere",
+            "nom.max"=>"le nom doit pas depasser 25 caracteres",
+            "nom.min"=>"le nom doit pas etre inferieur a 3 caracteres",
+            "nom.unique"=>"le nom doit etre unique",
+        ]);
+        $categorie= new Categorie();
+        $categorie->nom=$request->nom;
+        $categorie->save();
+        return redirect()->route("produit.index");
     }
 
     /**

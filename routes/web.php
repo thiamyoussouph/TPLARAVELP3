@@ -2,6 +2,7 @@
 
 
 
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ProduitController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +19,6 @@ Route::get('/edit/{produit}',[ProduitController::class ,"edit"])->name("produit.
 Route::post('/produit',[ProduitController::class ,"store"])->name("produit.store");
 Route::put('/update/{produit}',[ProduitController::class ,"update"])->name("produit.update");
 Route::delete('/delete/{produit}',[ProduitController::class ,"destroy"])->name("produit.delete");
+Route::get('/ctegorie/form',[CategorieController::class ,"create"])->name("categorie.create");
+Route::post('/ctegorie/ajout',[CategorieController::class ,"store"])->name("categorie.store");
+

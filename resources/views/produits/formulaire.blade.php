@@ -34,7 +34,13 @@
     <label for="exampleInputPassword1" class="form-label">Prix</label>
     <input type="number" class="form-control" id="exampleInputPassword1" name="prix">
   </div>
-  <button type="submit" class="btn btn-success">ajouter</button>
+  <select class="form-select" aria-label="Default select example" name="categorie_id">
+    @foreach ($categories as $categorie)
+  <option selected value="{{$categorie->id}}">{{$categorie->nom}}</option>
+  @endforeach
+ 
+</select>
+  <button type="submit" class="btn btn-success mt-3" >ajouter</button>
 </form>
 
     </div>

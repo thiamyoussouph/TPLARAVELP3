@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Categorie;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,8 @@ class ProduitController extends Controller
      */
     public function create()
     {
-        return view("produits.formulaire");
+        $categories= Categorie::all();
+        return view("produits.formulaire",compact("categories"));
     }
 
     /**
@@ -34,7 +36,8 @@ class ProduitController extends Controller
         $validate=$request->validate([
             "nom"=>"required|string|max:35|min:3|unique:produits",
             "prix"=>"required",
-            "description"=>"required"
+            "description"=>"required",
+            "categorie_id"=>"required"
         ],[
             "nom.required"=>"le nom est obligatoire ",
             "nom.string"=>"le nom doit etre une chaine de caractere",
@@ -42,7 +45,8 @@ class ProduitController extends Controller
             "nom.min"=>"le nom doit pas etre inferieur a 3 caracteres",
             "nom.unique"=>"le nom doit etre unique",
             "prix.required"=>"le prix est obligatoire",
-            "description.required"=>"la description est obligatoire"
+            "description.required"=>"la description est obligatoire",
+            "categorie_id.required"=>"la la categorie  doit obligatoire"
         ]);
 
 
@@ -57,6 +61,7 @@ class ProduitController extends Controller
     $produit->nom=$request->nom;
     $produit->prix=$request->prix;
     $produit->description=$request->description;
+    $produit->categorie_id=$request->categorie_id;
     $produit->save();
     return redirect()->route("produit.index")->with("success","le produit a ete ajouter avec succes");
 
